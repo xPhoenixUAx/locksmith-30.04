@@ -1,0 +1,35 @@
+Image credits for LockBridge Connect local demo assets
+
+These images are illustrative only. People depicted in any source image are not providers listed on this site.
+
+Doorlock-with-bolts-and-key.jpg
+- Source: Wikimedia Commons
+- Author: Kmtextor
+- License: Creative Commons Attribution-Share Alike 4.0 International
+- Page: https://commons.wikimedia.org/wiki/File:Doorlock-with-bolts-and-key.jpg
+- Used/adapted for: homepage hero, residential imagery, about imagery, lock hardware gallery.
+
+Deadbolt Door Lock (48650623173).jpg
+- Source: Wikimedia Commons
+- Author: Tony Webster from Laramie, Wyoming, United States
+- License: Wikimedia Commons file license as listed on the source page
+- Page: https://commons.wikimedia.org/wiki/File:Deadbolt_Door_Lock_(48650623173).jpg
+- Used/adapted for: urgent request imagery and lock close-up gallery.
+
+Standard-lock-key.jpg
+- Source: Wikimedia Commons
+- Author: Evan-Amos
+- License: Public domain dedication as listed on the source page
+- Page: https://commons.wikimedia.org/wiki/File:Standard-lock-key.jpg
+- Used/adapted for: services overview and commercial/access illustrative imagery.
+
+Car_keys_with_keychain.jpg
+- Source: Wikimedia Commons
+- Author: MediaPhoto.Org
+- License: Wikimedia Commons file license as listed on the source page
+- Page: https://commons.wikimedia.org/wiki/File:Car_keys_with_keychain.jpg
+- Used/adapted for: automotive request imagery and car key gallery.
+
+Important:
+- Local filenames have been renamed for website use.
+- All images are illustrative and do not imply that the depicted people, products, places, or organizations are affiliated with LockBridge Connect.
