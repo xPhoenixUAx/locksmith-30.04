@@ -73,7 +73,7 @@
 
     <section class="trust-ribbon-section" aria-label="Trust signals">
       <div class="container">
-        <div class="trust-ribbon">
+        <div class="trust-ribbon reveal">
           <span>Trusted request categories</span>
           <strong><i data-lucide="home" aria-hidden="true"></i> Residential</strong>
           <strong><i data-lucide="car" aria-hidden="true"></i> Automotive</strong>
@@ -90,31 +90,30 @@
             <span class="eyebrow">Service pathways</span>
             <h2>Get into the right lane before a provider contacts you.</h2>
           </div>
-          <p>Each path collects the right context without giving unsafe instructions for opening locks, vehicles, or access systems.</p>
         </div>
-        <div class="ref-service-grid">
-          <article class="ref-service-card">
+        <div class="ref-service-grid reveal-group">
+          <article class="ref-service-card reveal-item">
             <img src="img/services/emergency-locksmith-door-lock.jpg" alt="Door lock representing an urgent locksmith-related request" loading="lazy">
             <span class="service-icon"><i data-lucide="siren" aria-hidden="true"></i></span>
             <h3>Urgent Lock Requests</h3>
             <p>For lockouts, broken keys, damaged locks, and access issues that need prompt provider contact when available.</p>
             <a href="service-emergency-locksmith.html">View urgent path</a>
           </article>
-          <article class="ref-service-card">
+          <article class="ref-service-card reveal-item">
             <img src="img/services/residential-lock-rekey-request.jpg" alt="Residential lock and keys for home locksmith-related request" loading="lazy">
             <span class="service-icon"><i data-lucide="home" aria-hidden="true"></i></span>
             <h3>Residential Locksmith</h3>
             <p>For home lockouts, rekeying after moving, damaged locks, and lock replacement discussions.</p>
             <a href="service-residential-locksmith.html">View residential path</a>
           </article>
-          <article class="ref-service-card">
+          <article class="ref-service-card reveal-item">
             <img src="img/services/automotive-key-service-desk.jpg" alt="Car keys representing an automotive locksmith-related request" loading="lazy">
             <span class="service-icon"><i data-lucide="car" aria-hidden="true"></i></span>
             <h3>Vehicle Key & Access</h3>
             <p>For vehicle lockouts, lost keys, broken keys, fob concerns, and ignition-related access issues.</p>
             <a href="service-automotive-locksmith.html">View automotive path</a>
           </article>
-          <article class="ref-service-card is-featured">
+          <article class="ref-service-card reveal-item">
             <img src="img/services/commercial-door-access-lock.jpg" alt="Commercial lock and access hardware for business locksmith-related request" loading="lazy">
             <span class="service-icon"><i data-lucide="building-2" aria-hidden="true"></i></span>
             <h3>Commercial Locksmith</h3>
@@ -158,12 +157,14 @@
           <span class="eyebrow">How it works</span>
           <h2>A cleaner request flow for stressful lock situations.</h2>
           <p>LockBridge Connect does not send employees or perform locksmith work. It helps organize your request so independent providers can discuss availability and terms.</p>
+          <a class="btn btn-primary" href="contact.html">Start a Request <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+          <p class="process-note">Provider availability, response times, pricing, and service terms may vary by location and category.</p>
         </div>
-        <div class="process-board">
-          <article><span>01</span><h3>Describe the issue</h3><p>Share ZIP code, service type, urgency, and the basic access concern.</p></article>
-          <article><span>02</span><h3>Choose a category</h3><p>Emergency, residential, automotive, commercial, rekeying, replacement, or smart lock.</p></article>
-          <article><span>03</span><h3>Provider contact</h3><p>Independent local providers may contact you based on location and availability.</p></article>
-          <article><span>04</span><h3>Verify before approval</h3><p>Confirm identity, pricing, licensing where applicable, proof requirements, and terms.</p></article>
+        <div class="process-board reveal-group">
+          <article class="reveal-item"><span>01</span><h3>Describe the issue</h3><p>Share ZIP code, service type, urgency, and the basic access concern.</p></article>
+          <article class="reveal-item"><span>02</span><h3>Choose a category</h3><p>Emergency, residential, automotive, commercial, rekeying, replacement, or smart lock.</p></article>
+          <article class="reveal-item"><span>03</span><h3>Provider contact</h3><p>Independent local providers may contact you based on location and availability.</p></article>
+          <article class="reveal-item"><span>04</span><h3>Verify before approval</h3><p>Confirm identity, pricing, licensing where applicable, proof requirements, and terms.</p></article>
         </div>
       </div>
     </section>
@@ -174,35 +175,75 @@
           <span class="eyebrow">Before approving service</span>
           <h2>Fast should still feel clear.</h2>
           <p>Urgency can make vague pricing or unclear credentials feel normal. Use these checkpoints before approving work with any independent provider.</p>
+          <div class="verify-mini-flow" aria-label="Verification flow">
+            <span>Ask</span>
+            <i data-lucide="arrow-right" aria-hidden="true"></i>
+            <span>Confirm</span>
+            <i data-lucide="arrow-right" aria-hidden="true"></i>
+            <span>Approve</span>
+          </div>
         </div>
-        <div class="verify-checks">
-          <div><i data-lucide="badge-check" aria-hidden="true"></i><strong>Provider identity</strong><span>Confirm who is contacting you.</span></div>
-          <div><i data-lucide="receipt" aria-hidden="true"></i><strong>Pricing first</strong><span>Ask about fees before work begins.</span></div>
-          <div><i data-lucide="file-check-2" aria-hidden="true"></i><strong>Written terms</strong><span>Request clear service terms.</span></div>
-          <div><i data-lucide="key-round" aria-hidden="true"></i><strong>Ownership proof</strong><span>Expect property or vehicle checks.</span></div>
+        <div class="verify-checks reveal-group">
+          <div class="reveal-item"><i data-lucide="badge-check" aria-hidden="true"></i><strong>Provider identity</strong><span>Confirm the provider name, business details, and who is contacting you.</span></div>
+          <div class="reveal-item"><i data-lucide="receipt" aria-hidden="true"></i><strong>Pricing first</strong><span>Ask about trip fees, labor, parts, and payment terms before work begins.</span></div>
+          <div class="reveal-item"><i data-lucide="file-check-2" aria-hidden="true"></i><strong>Written terms</strong><span>Request clear service terms, scope, and any warranty information when available.</span></div>
+          <div class="reveal-item"><i data-lucide="key-round" aria-hidden="true"></i><strong>Ownership proof</strong><span>Expect property, vehicle, or authorization checks before service is approved.</span></div>
+        </div>
+        <div class="verify-bottom-note">
+          <i data-lucide="shield-alert" aria-hidden="true"></i>
+          <p>LockBridge Connect does not guarantee provider licensing, pricing, response time, or work quality. Users should verify all terms directly with the independent provider.</p>
         </div>
       </div>
     </section>
 
     <section class="ref-area section">
-      <div class="container area-band">
-        <div>
-          <span class="eyebrow">Common request situations</span>
-          <h2>Built for the moments people actually search.</h2>
+      <div class="container route-finder">
+        <div class="route-copy">
+          <span class="eyebrow">Not sure where to start?</span>
+          <h2>Use the situation to choose the right request path.</h2>
+          <p>This section is here to prevent wrong-category requests. Pick the closest match, open the matching service page, then submit the form with the details providers usually ask about first.</p>
         </div>
-        <div class="area-pills" aria-label="Common locksmith request situations">
-          <span>Home lockout</span><span>Vehicle lockout</span><span>Lost keys</span><span>Broken key</span><span>Lock not turning</span><span>Move-in rekey</span><span>Smart lock setup</span><span>Office access issue</span><span>Commercial lock concern</span><span>Key control change</span>
+        <div class="route-table reveal-group" aria-label="Request routing guide">
+          <article class="reveal-item">
+            <div><strong>I am locked out or need access soon</strong><span>Home, vehicle, office, or urgent access concern.</span></div>
+            <a href="service-emergency-locksmith.html">Emergency path</a>
+            <small>Prepare ZIP code, location type, urgency, and proof of access rights.</small>
+          </article>
+          <article class="reveal-item">
+            <div><strong>I need help with a home lock</strong><span>Move-in rekeying, lock replacement, smart lock setup, damaged lock.</span></div>
+            <a href="service-residential-locksmith.html">Residential path</a>
+            <small>Prepare property type, lock concern, preferred timing, and pricing questions.</small>
+          </article>
+          <article class="reveal-item">
+            <div><strong>My vehicle key or access is the issue</strong><span>Locked vehicle, lost car key, broken key, fob concern, trunk or ignition issue.</span></div>
+            <a href="service-automotive-locksmith.html">Automotive path</a>
+            <small>Prepare vehicle make/model/year and ownership or authorization proof.</small>
+          </article>
+          <article class="reveal-item">
+            <div><strong>This is for a business or managed property</strong><span>Office access, employee turnover rekeying, hardware, access control concern.</span></div>
+            <a href="service-commercial-locksmith.html">Commercial path</a>
+            <small>Prepare business address, authorization, schedule needs, and service scope.</small>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="ref-proof section">
       <div class="container proof-editorial">
-        <div class="proof-number">0%</div>
+        <div class="proof-seal">
+          <span class="proof-percent">100%</span>
+          <strong>Independent referral model</strong>
+          <span>Provider boundaries disclosed before contact</span>
+        </div>
         <div>
           <span class="eyebrow">Aggregator clarity</span>
-          <h2>Direct locksmith work performed by LockBridge Connect.</h2>
+          <h2>Clear boundaries before any provider conversation.</h2>
           <p>LockBridge Connect is not a locksmith company. It does not employ locksmiths, does not guarantee arrival times, does not set provider pricing, and does not issue service warranties.</p>
+          <ul class="proof-list">
+            <li>Provider availability may vary by location and category.</li>
+            <li>Users should verify credentials, pricing, and service terms.</li>
+            <li>Any approved service is arranged directly with the independent provider.</li>
+          </ul>
           <a class="btn btn-dark" href="about.html">Read the platform model</a>
         </div>
       </div>
@@ -244,7 +285,7 @@
       <div><h3>Contact</h3><ul class="footer-links"><li><a href="tel:+15551234567">(555) 123-4567</a></li><li><a href="mailto:support@lockbridgeconnect.com">support@lockbridgeconnect.com</a></li><li><a href="https://wa.me/15551234567">WhatsApp</a></li><li>Monday-Friday: 8:00 AM - 8:00 PM</li><li>Saturday: 9:00 AM - 5:00 PM</li><li>Sunday: Limited availability</li><li>Urgent requests may be submitted at any time. Provider availability and response times may vary.</li></ul></div>
     </div>
     <div class="container footer-bottom">
-      <p><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="cookie.html">Cookie Policy</a> · <a href="image-credits.txt">Image Credits</a></p>
+      <p><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="cookie.html">Cookie Policy</a></p>
       <p class="footer-disclaimer">Disclaimer: This site is a free service to assist users in connecting with local service providers. All contractors/providers are independent and this site does not warrant or guarantee any work performed. It is the responsibility of the user to verify that the hired contractor or provider furnishes the necessary license, insurance, identification, pricing, and service terms required for the work being performed. All persons depicted in a photo or video are actors or models and not contractors listed on this site.</p>
     </div>
   </footer>

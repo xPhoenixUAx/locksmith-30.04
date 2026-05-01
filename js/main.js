@@ -17,6 +17,8 @@
     initForms();
     initGallery();
     initReveals();
+    initHeroParallax();
+    initCardTilt();
     initActiveNavigation();
     initImageFallbacks();
   });
@@ -194,7 +196,7 @@
   }
 
   function initReveals() {
-    const items = qsa(".reveal");
+    const items = qsa(".reveal, .reveal-group, .reveal-item");
     if (!items.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       items.forEach((item) => item.classList.add("is-visible"));
       return;
@@ -210,6 +212,45 @@
       { threshold: 0.12 }
     );
     items.forEach((item) => observer.observe(item));
+  }
+
+  function initHeroParallax() {
+    const hero = qs(".ref-hero");
+    const photo = qs(".ref-hero-photo");
+    if (!hero || !photo || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    hero.addEventListener("pointermove", (event) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      photo.style.setProperty("--hero-parallax-x", `${x * 14}px`);
+      photo.style.setProperty("--hero-parallax-y", `${y * 10}px`);
+    });
+
+    hero.addEventListener("pointerleave", () => {
+      photo.style.setProperty("--hero-parallax-x", "0px");
+      photo.style.setProperty("--hero-parallax-y", "0px");
+    });
+  }
+
+  function initCardTilt() {
+    const cards = qsa(".ref-service-card");
+    if (!cards.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    cards.forEach((card) => {
+      card.addEventListener("pointermove", (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.setProperty("--tilt-x", `${x * 4}deg`);
+        card.style.setProperty("--tilt-y", `${y * -4}deg`);
+      });
+
+      card.addEventListener("pointerleave", () => {
+        card.style.setProperty("--tilt-x", "0deg");
+        card.style.setProperty("--tilt-y", "0deg");
+      });
+    });
   }
 
   function initActiveNavigation() {
