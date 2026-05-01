@@ -21,6 +21,7 @@
     initCardTilt();
     initActiveNavigation();
     initImageFallbacks();
+    initCookieBanner();
   });
 
   function initHeader() {
@@ -273,5 +274,54 @@
         { once: true }
       );
     });
+  }
+
+  function initCookieBanner() {
+    const storageKey = "lockbridge-cookie-consent";
+    if (localStorage.getItem(storageKey)) return;
+
+    const banner = document.createElement("section");
+    banner.className = "cookie-banner";
+    banner.setAttribute("aria-label", "Cookie consent");
+    banner.innerHTML = `
+      <div class="cookie-copy">
+        <span class="cookie-label">Cookie preferences</span>
+        <h2>We use cookies to improve this site.</h2>
+        <p>LockBridge Connect uses essential cookies and may use analytics or marketing cookies to understand site usage and improve request flow. You can accept, reject, or manage non-essential cookies.</p>
+        <a href="cookie.html">Read Cookie Policy</a>
+      </div>
+      <div class="cookie-preferences" hidden>
+        <label><input type="checkbox" checked disabled> Essential cookies</label>
+        <label><input type="checkbox" data-cookie-option="analytics"> Analytics cookies</label>
+        <label><input type="checkbox" data-cookie-option="marketing"> Marketing cookies</label>
+      </div>
+      <div class="cookie-actions">
+        <button class="btn btn-primary" type="button" data-cookie-accept>Accept</button>
+        <button class="btn btn-outline" type="button" data-cookie-reject>Reject</button>
+        <button class="btn btn-ghost" type="button" data-cookie-manage aria-expanded="false">Manage</button>
+      </div>
+    `;
+
+    document.body.appendChild(banner);
+
+    const preferences = qs(".cookie-preferences", banner);
+    const manage = qs("[data-cookie-manage]", banner);
+    const accept = qs("[data-cookie-accept]", banner);
+    const reject = qs("[data-cookie-reject]", banner);
+
+    const save = (value) => {
+      localStorage.setItem(storageKey, JSON.stringify({ ...value, savedAt: new Date().toISOString() }));
+      banner.classList.add("is-hiding");
+      window.setTimeout(() => banner.remove(), 220);
+    };
+
+    manage.addEventListener("click", () => {
+      const isHidden = preferences.hasAttribute("hidden");
+      preferences.toggleAttribute("hidden", !isHidden);
+      manage.setAttribute("aria-expanded", String(isHidden));
+    });
+
+    accept.addEventListener("click", () => save({ essential: true, analytics: true, marketing: true }));
+    reject.addEventListener("click", () => save({ essential: true, analytics: false, marketing: false }));
   }
 })();

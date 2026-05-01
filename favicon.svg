@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="LockBridge Connect">
+  <rect width="64" height="64" rx="14" fill="#0b2036"/>
+  <path d="M32 8 50 15v14c0 13-7.7 22.4-18 27-10.3-4.6-18-14-18-27V15l18-7Z" fill="#e8a739"/>
+  <path d="M32 14 44 18.8v10.5c0 8.8-4.8 15.7-12 19.5-7.2-3.8-12-10.7-12-19.5V18.8L32 14Z" fill="#0b2036"/>
+  <rect x="24" y="29" width="16" height="14" rx="3" fill="#e8a739"/>
+  <path d="M27 29v-4.4c0-3.1 2.2-5.6 5-5.6s5 2.5 5 5.6V29h-3.5v-4.4c0-1.2-.6-2.1-1.5-2.1s-1.5.9-1.5 2.1V29H27Z" fill="#e8a739"/>
+</svg>
