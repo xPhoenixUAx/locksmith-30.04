@@ -60,23 +60,6 @@
   text-transform: uppercase;
 }
 
-.desktop-nav {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.desktop-nav a {
-  color: #3e4856;
-  font-size: 0.93rem;
-  font-weight: 800;
-}
-
-.desktop-nav a[aria-current="page"],
-.desktop-nav a:hover {
-  color: var(--navy);
-}
-
 .header-actions {
   display: flex;
   align-items: center;

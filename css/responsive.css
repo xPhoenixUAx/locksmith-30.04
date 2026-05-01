@@ -1,8 +1,4 @@
 @media (max-width: 1080px) {
-  .desktop-nav {
-    display: none;
-  }
-
   .desktop-phone {
     display: none;
   }

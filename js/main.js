@@ -457,7 +457,7 @@
 
   function initActiveNavigation() {
     const current = window.location.pathname.split("/").pop() || "index.html";
-    qsa(".desktop-nav a, .mobile-nav a").forEach((link) => {
+    qsa(".mobile-nav a").forEach((link) => {
       const href = link.getAttribute("href");
       if (href === current) link.setAttribute("aria-current", "page");
     });
