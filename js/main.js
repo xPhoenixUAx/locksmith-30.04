@@ -5,6 +5,8 @@
   const qsa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
   document.addEventListener("DOMContentLoaded", () => {
+    initSiteConfig();
+
     if (window.lucide) {
       window.lucide.createIcons();
     }
@@ -23,6 +25,205 @@
     initImageFallbacks();
     initCookieBanner();
   });
+
+  function initSiteConfig() {
+    if (window.LOCKBRIDGE_CONFIG) {
+      applySiteConfig(window.LOCKBRIDGE_CONFIG);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "js/site-config.js";
+    script.onload = () => applySiteConfig(window.LOCKBRIDGE_CONFIG);
+    document.head.appendChild(script);
+  }
+
+  function applySiteConfig(config) {
+    if (!config) return;
+
+    updateBrand(config);
+    updatePhoneLinks(config);
+    updateEmailLinks(config);
+    updateWhatsappLinks(config);
+    updateFooter(config);
+    updateContactDetails(config);
+    updateInlineConfigText(config);
+  }
+
+  function updateBrand(config) {
+    if (!config.companyName) return;
+    qsa(".brand").forEach((brand) => {
+      brand.setAttribute("aria-label", `${config.companyName} home`);
+      const text = qs(".brand-text", brand);
+      if (!text) return;
+      const parts = config.companyName.split(" ");
+      const first = parts.shift() || config.companyName;
+      const rest = parts.join(" ");
+      text.innerHTML = `<span>${escapeHtml(first)}</span><span>${escapeHtml(rest)}</span>`;
+    });
+  }
+
+  function updatePhoneLinks(config) {
+    const phone = config.phone || {};
+    if (!phone.tel) return;
+
+    qsa("a[href^='tel:']").forEach((link) => {
+      link.href = phone.tel;
+      link.setAttribute("aria-label", `Call ${config.companyName || "us"}`);
+
+      if (link.classList.contains("mobile-phone")) return;
+
+      const isButton =
+        link.classList.contains("btn") ||
+        link.classList.contains("floating-cta") ||
+        link.classList.contains("desktop-phone");
+      const label = isButton ? phone.buttonLabel || phone.display : phone.display || phone.buttonLabel;
+      setLinkLabel(link, label || "");
+    });
+  }
+
+  function updateEmailLinks(config) {
+    const support = config.email && config.email.support;
+    const privacy = config.email && config.email.privacy;
+    if (!support && !privacy) return;
+
+    qsa("a[href^='mailto:']").forEach((link) => {
+      const current = link.getAttribute("href") || "";
+      const isPrivacy = current.includes("privacy@") || link.textContent.includes("privacy@");
+      const email = isPrivacy && privacy ? privacy : support;
+      if (!email) return;
+      link.href = `mailto:${email}`;
+      link.textContent = email;
+    });
+  }
+
+  function updateWhatsappLinks(config) {
+    if (!config.whatsappUrl) return;
+    qsa("a[href*='wa.me']").forEach((link) => {
+      link.href = config.whatsappUrl;
+    });
+  }
+
+  function updateFooter(config) {
+    const footer = qs(".site-footer");
+    if (!footer) return;
+
+    const brandDescription = qs(".footer-main > div:first-child p", footer);
+    if (brandDescription && config.footer && config.footer.description) {
+      brandDescription.textContent = config.footer.description;
+    }
+
+    const footerContact = qs(".footer-main > div:last-child .footer-links", footer);
+    if (footerContact) {
+      footerContact.innerHTML = "";
+      const items = [
+        linkItem(config.phone && config.phone.display, config.phone && config.phone.tel),
+        linkItem(config.email && config.email.support, config.email && `mailto:${config.email.support}`),
+        linkItem("WhatsApp", config.whatsappUrl),
+        ...(config.footer && config.footer.businessHours ? config.footer.businessHours.map((text) => textItem(text)) : []),
+        textItem(config.footer && config.footer.urgentNote)
+      ].filter(Boolean);
+      items.forEach((item) => footerContact.appendChild(item));
+    }
+
+    const bottom = qs(".footer-bottom", footer);
+    if (bottom) {
+      let meta = qs(".footer-company-meta", bottom);
+      if (!meta) {
+        meta = document.createElement("p");
+        meta.className = "footer-company-meta";
+        bottom.prepend(meta);
+      }
+      meta.textContent = [config.companyName, config.address, config.companyId].filter(Boolean).join(" · ");
+    }
+
+    const disclaimer = qs(".footer-disclaimer", footer);
+    if (disclaimer && config.footer && config.footer.disclaimer) {
+      disclaimer.textContent = config.footer.disclaimer;
+    }
+  }
+
+  function updateContactDetails(config) {
+    qsa(".info-list li").forEach((item) => {
+      if (item.textContent.includes("Service Area:") && config.address) {
+        const icon = qs("svg, i", item);
+        item.textContent = config.address;
+      if (icon) item.prepend(icon);
+      }
+    });
+  }
+
+  function updateInlineConfigText(config) {
+    const replacements = [
+      ["LockBridge Connect", config.companyName],
+      ["(555) 123-4567", config.phone && config.phone.display],
+      ["support@lockbridgeconnect.com", config.email && config.email.support],
+      ["privacy@lockbridgeconnect.com", config.email && config.email.privacy],
+      ["Service Area: United States", config.address]
+    ].filter(([, value]) => value);
+
+    if (!replacements.length) return;
+
+    document.title = replaceText(document.title, replacements);
+    qsa("meta[name='description']").forEach((meta) => {
+      meta.content = replaceText(meta.content, replacements);
+    });
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        if (!parent || ["SCRIPT", "STYLE", "TEXTAREA", "SELECT", "OPTION"].includes(parent.tagName)) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        return replacements.some(([from]) => node.nodeValue.includes(from))
+          ? NodeFilter.FILTER_ACCEPT
+          : NodeFilter.FILTER_REJECT;
+      }
+    });
+
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((node) => {
+      node.nodeValue = replaceText(node.nodeValue, replacements);
+    });
+  }
+
+  function replaceText(value, replacements) {
+    return replacements.reduce((text, [from, to]) => text.split(from).join(to), value);
+  }
+
+  function linkItem(label, href) {
+    if (!label || !href) return null;
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = href;
+    a.textContent = label;
+    li.appendChild(a);
+    return li;
+  }
+
+  function textItem(text) {
+    if (!text) return null;
+    const li = document.createElement("li");
+    li.textContent = text;
+    return li;
+  }
+
+  function setLinkLabel(link, label) {
+    const icon = qs("svg, i", link);
+    link.textContent = "";
+    if (icon) link.appendChild(icon);
+    link.append(document.createTextNode(label));
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 
   function initHeader() {
     const header = qs(".site-header");

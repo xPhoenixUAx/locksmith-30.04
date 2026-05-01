@@ -266,6 +266,13 @@
   border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
+.footer-company-meta {
+  margin: 0 0 0.55rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
 .footer-disclaimer {
   max-width: 1120px;
   margin: 0;
